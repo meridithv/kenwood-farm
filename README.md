@@ -1,0 +1,1 @@
+This will be a website for Kenwood Farm in Ohio, home to the Charvott, Mathews, and Driscoll families. It will give users the ability to access and edit (1) a shared farm calendar; (2) a message board; (3) shared photo albums of the kids. It will also have a static family tree for reference, since the family's so expansive.
