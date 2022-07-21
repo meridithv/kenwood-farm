@@ -1,5 +1,5 @@
 body {
-  background: #fafafa;
+  background: #f3e8d0;
   color: #333333;
   margin-top: 5rem;
 }
@@ -9,7 +9,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-steel {
-  background-color: #5f788a;
+  background-color: #242d24;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -17,7 +17,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+  color: #f3e8d0;
 }
 
 .site-header .navbar-nav .nav-link.active {
@@ -25,9 +25,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .content-section {
-  background: #ffffff;
+  background: #f3e8d0;
   padding: 10px 20px;
-  border: 1px solid #dddddd;
+  border: 0px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
 }
@@ -54,7 +54,7 @@ a.article-title:hover {
 .article-metadata {
   padding-bottom: 1px;
   margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
+  border-bottom: 0px solid #e3e3e3
 }
 
 .article-metadata a:hover {
