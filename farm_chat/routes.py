@@ -73,6 +73,12 @@ def tree():
 	return render_template('tree.html', title='The Mathews/Sharvott/etc Tree')
 
 
+@app.route("/photos")
+@login_required
+def photos():
+	return render_template('photos.html', title='Farm photos')
+
+
 @app.route("/account")
 @login_required
 def account():
@@ -82,13 +88,3 @@ def account():
 if __name__ == '__main__':
 	app.run(debug=True)
 
-'''
-@app.route("/discuss")
-	# tbd here
-@app.route("/calendar")
-	# tbd here
-@app.route("/photos")
-	# tbd here
-@app.route("/familytree")
-	# tbd here
-'''

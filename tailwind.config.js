@@ -16,26 +16,22 @@ module.exports = {
       clem: '#FA831F',
       marigold: '#FA9D2C',
       creamsoda: '#FFF5CB',
+      white: '#FFFFFF'
+    },
     screens: {
       sm:'480px',
-      md:'768px',
+      md:'868px',
       lg:'976px',
       xl:'1440px'
     },
-    fontFamily: {
-      plex: 'Plex, sans-serif',
-      libre: 'Libre, serif',
-      bitter: 'Bitter, serif',
-      bungee: 'Bungee, sans-serif',
-      yeseva: 'Yeseva, serif'
-    },
-    },
     extend: {
-    },
-  },
-  variants: {
-    extend: {},
-  },
-
-  plugins: [],
+      fontFamily: {
+        plex: ['IBM Plex Sans', 'sans-serif'],
+        libre: ['Libre Baskerville', 'serif'],
+        bitter: ['Bitter', 'serif'],
+        bungee: ['Bungee', 'sans-serif'],
+        yeseva: ['Yeseva One', 'serif']
+      },
+    }
+  }
 }

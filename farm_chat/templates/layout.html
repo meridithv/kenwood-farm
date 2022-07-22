@@ -7,34 +7,52 @@
 	<link rel="stylesheet" href="./static/styles.css">
 </head>
 <body class="bg-[#242D24]">
-	<!-- Navbar -->
-	<nav class="relative container mx-auto p-2 bg-[#F3E8D0]">
-		<!--Flex container -->
-		<div class ="flex items-center justify-evenly">
-			<!-- Logo -->
-			<div class="pt-1">
-				<img src="./static/images/kenwood_logo.png" width=220px alt="" />
+	<div class="bg-gray-50">
+		<div class="max-w-7xl mx-auto grid grid-cols-12 bg-gray-200">
+		     <div class="col-span-2">
+		     	<!--Left sidebar -->
+		     </div>
+		     <div class="col-span-8 bg-[#F3E8D0] h-screen">
+		     	<!-- Navbar -->
+				<nav class="relative container mx-auto px-8 bg-[#F3E8D0]">
+					<!--Flex container -->
+					<div class ="flex items-center justify-evenly">
+						<!-- Logo -->
+						<div class="pt-1">
+							<img src="./static/images/kenwood_logo.png" width=220px alt="" />
+						</div>
+						<!-- Menu items -->
+						<div class="hidden md:flex space-x-6 text-xs uppercase font-plex tracking-widest">
+							<a href="{{ url_for('discuss') }}" class="hover:text-[#6D000A]">Calendar</a>
+							<a href="{{ url_for('photos') }}" class="hover:text-[#AD002B]">Photos</a>
+							<a href="{{ url_for('discuss') }}" class="hover:text-[#C82813]">Farm chat</a>
+							<a href="{{ url_for('tree') }}" class="hover:text-fever">Family Tree</a>
+							{% if current_user.is_authenticated %}
+			                <a href="{{ url_for('account') }}" class="hover:text-clem">Account</a>
+			                <a href="{{ url_for('logout') }}" class="hover:text-marigold">Logout</a>
+			              {% else %}
+			                <a href="{{ url_for('login') }}" class="hover:text-clem">Log in</a>
+			                <a href="{{ url_for('register') }}" class="hover:text-marigold">Register</a>
+			              {% endif %}
+						</div>
+						<!-- Button -->
+					</div>
+				</nav>
+			<div class="mx-auto px-8 pt-8">
+				{% block content %} {% endblock %}
 			</div>
-			<!-- Menu items -->
-			<div class="hidden md:flex space-x-6 text-sm uppercase font-plex tracking-widest">
-				<a href="{{ url_for('discuss') }}" class="hover:text-[#6D000A]">Calendar</a>
-				<a href="{{ url_for('discuss') }}" class="hover:text-[#AD002B]">Photos</a>
-				<a href="{{ url_for('discuss') }}" class="hover:text-[#C82813]">Farm chat</a>
-				<a href="{{ url_for('tree') }}" class="hover:text-[#E51219]">Family Tree</a>
-				{% if current_user.is_authenticated %}
-                <a href="{{ url_for('account') }}" class="hover:text-clem">Account</a>
-                <a href="{{ url_for('logout') }}" class="hover:text-marigold">Logout</a>
-              {% else %}
-                <a href="{{ url_for('login') }}" class="hover:text-clem">Log in</a>
-                <a href="{{ url_for('register') }}" class="hover:text-marigold">Register</a>
-              {% endif %}
-			</div>
-			<!-- Button -->
-
 		</div>
-	</nav>
-	<div class="divBox flex items-center justify-center pt-8 mx-2">
-	{% block content %} {% endblock %}
+		<div class="col-span-2">
+			<!--Right sidebar -->
+			<div class ="flex p-2">
+				{% if current_user.is_authenticated %}
+				<img src="./static/profile_pics/default_avatar.png" width='40px' height='40px'>
+				<div class="text-sm font-plex px-2 pt-2 text-white">
+					<i><b>Welcome,&nbsp;</b></i><br>
+					<span class="hover:text-marigold"><a href="{{ url_for('account')}} ">John Mathews II</a></span>!
+				</div>
+				{% endif %}
+		</div>
 	</div>
 </body>
 </html>
