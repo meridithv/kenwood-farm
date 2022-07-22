@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Join the farm online</legend>
+				<div class="form-group">
+					{{ form.first_name.label(class="form-control-label") }}<br>
+					{{ form.first_name(class="form-control-label") }}
+				</div>
+				<div class="form-group">
+					{{ form.last_name.label(class="form-control-label") }}<br>
+					{{ form.last_name(class="form-control-label") }}
+				</div>
+				<div class="form-group">
+					{{ form.email.label(class="form-control-label") }}<br>
+					{{ form.email(class="form-control-label") }}
+				</div> 
+				<div class="form-group">
+					{{ form.password.label(class="form-control-label") }}<br>
+					{{ form.password(class="form-control-label") }}
+				</div>
+				<div class="form-group">
+					{{ form.confirm_password.label(class="form-control-label") }}<br>
+					{{ form.confirm_password(class="form-control-label") }}<br>
+				</div>
+				<div class="form-group">
+					{{ form.golden_ticket.label(class="form-control-label") }}<br>
+					{{ form.golden_ticket(class="form-control-label") }}<br><br>
+				</div>
+			</fieldset>
+			<div class="form-group">
+					{{ form.submit(class="btn btn-outline-info") }}
+			</div>  
+			{% for field, errors in form.errors.items() %}
+			<div class="alert alert-error">
+				{{ ' AND '.join(errors) }}
+			</div>
+			{% endfor %}
+		</form>
+	</div>
+	<div class="border-top pt-3">
+		<small class="text-muted">
+			Already have an account? <a class="ml-2" href="{{ url_for('login')}}">Sign in here.</a>
+		</small>
+	</div>
+
+{% endblock content %}

@@ -1,52 +1,96 @@
-{% extends "layout.html" %}
-{% block content %}
-    <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Kenwood Farm</title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./static/styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Yeseva+One&display=swap');
+
+        .font-family-libre {
+            font-family: 'Libre Baskerville';
+        }
+        .font-family-yeseva {
+            font-family: 'Yeseva One';
+        }
+    </style>
+</head>
+<body class="bg-ecru font-family-libre h-screen">
+
+    <div class="w-full flex flex-wrap">
+
+        <!-- Login Section -->
+        <div class="w-full md:w-1/2 flex flex-col">
+
+            <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                <a href="#" class="text-center font-family-yeseva text-7xl p-2">Kenwood</a>
+                <p class="text-center text-xl">Welcome back to the Farm.</p>
+                <div class="text-md font-italic font-libre text-fever">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                    <br>
+                                    {{  message }}
                             {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                </div> 
+                <form method="POST" action="" class="flex flex-col pt-3 md:pt-8">
+                    {{ form.hidden_tag() }}
+                    <div class="flex flex-col pt-4">
+                        <!-- EMAIL LABEL + FORM -->
+                        <label for="email" class="text-lg">Email</label>
+                        <!--<input type="email" id="email" placeholder="youremail@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">-->
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500") }}
+                        {% endif %}
+                    </div>
+                    <!-- PASSWORD LABEL + FORM -->
+                    <div class="flex flex-col pt-4">
+                        <label for="password" class="text-lg">Password</label>
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <div class="text-black"><!--was invalid feedback class on bootstrap-->
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500") }}
+                        {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
-                    {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
-                    {% endif %}
+                <div class="form-check text-xs pt-8">
+                    {{ form.remember }}
+                    {{ form.remember.label }}
+                    </div>
+    
+                     <input type="submit" value="Log in" class="text-black font-bold text-lg p-2 mt-8" />
+                </form>
+                <div class="text-center text-sm pt-12 pb-12">
+                    <p>Don't have an account? <a href="{{ url_for('register') }}" class="underline font-semibold">Sign up here.</a></p>
                 </div>
-                <div class="form-check">
-                    {{ form.remember(class="form-check-input") }}
-                    {{ form.remember.label(class="form-check-label") }}
-                </div>
-            </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
             </div>
-            <small class="text-muted ml-2">
-                <a href="#">Forgot Password?</a>
-            </small>
-        </form>
+
+        </div>
+
+        <!-- Image Section -->
+        <div class="w-1/2 shadow-2xl">
+            <img class="object-cover w-full h-screen hidden md:block" src="{{ url_for('static', filename='halloween_kids.jpeg')}}">
+        </div>
     </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
-        </small>
-    </div>
-{% endblock content %}
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "flask_farm",
+  "version": "1.0.0",
+  "description": "This will be a website for Kenwood Farm in Ohio, home to the Charvott, Mathews, and Driscoll families. It will give users the ability to access and edit (1) a shared farm calendar; (2) a message board; (3) shared photo albums of the kids. It will also have a static family tree for reference, since the family's so expansive.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i farm_chat/css/styles.css -o farm_chat/static/styles.css",
+    "watch ": "tailwindcss -i farm_chat/css/styles.css -o farm_chat/static/styles.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meridithv/kenwood-farm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meridithv/kenwood-farm/issues"
+  },
+  "homepage": "https://github.com/meridithv/kenwood-farm#readme"
+}
