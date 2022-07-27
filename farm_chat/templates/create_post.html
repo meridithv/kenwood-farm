@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<p>Don't be vulgar</p>
+<form method="POST" action="" class="flex flex-col pt-3 md:pt-8" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+		<div class="flex flex-col pt-2">
+	        <!-- TITLE LABEL + FORM -->
+	        <label for="title" class="text-md">Post title</label>
+	        {% if form.title.errors %}
+	            {{ form.title(class="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	            <div class="text-fever">
+	                {% for error in form.title.errors %}
+	                    <br>
+	                    <span class="text-fever italic">{{ error }}</span>
+	                {% endfor %}
+	            </div>
+	        {% else %}
+	            {{ form.title(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	        {% endif %}
+	    </div>
+	    <!-- CONTENT LABEL + FORM -->
+	    <div class="flex flex-col pt-2">
+	        <label for="content" class="text-md">Write your post here</label>
+	        {% if form.content.errors %}
+	            {{ form.content(class="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	            <div class="text-fever"><!--was invalid feedback class on bootstrap-->
+	                {% for error in form.content.errors %}
+	                    <span class="text-fever italic">{{ error }}</span>
+	                {% endfor %}
+	            </div>
+	        {% else %}
+	            {{ form.content(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	        {% endif %}
+	    </div>
+	    <input type="submit" value="Post to the farm chat" class="text-black font-bold uppercase text-md p-2 mt-8" />
+	</form>  
+
+{% endblock content %}

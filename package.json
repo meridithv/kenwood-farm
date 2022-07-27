@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/meridithv/kenwood-farm/issues"
   },
-  "homepage": "https://github.com/meridithv/kenwood-farm#readme"
+  "homepage": "https://github.com/meridithv/kenwood-farm#readme",
+  "dependencies": {
+    "fullcalendar": "^5.11.2"
+  }
 }

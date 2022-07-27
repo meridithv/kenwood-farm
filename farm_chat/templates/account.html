@@ -1,13 +1,76 @@
 {% extends "layout.html" %}
 {% block content %}
-	<div class="content-section">
-	  <div class="media">
-	    <img class="rounded-circle account-img" src="{{ image_file }}">
-	    <div class="media-body">
-	      <h2 class="account-heading">{{ current_user.username }}</h2>
-	      <p class="text-secondary">{{ current_user.email }}</p>
+
+<img src="{{ image_file }}" class="float-left align-middle border-2 border-black w-40 h-auto mr-4"/>
+<!-- USERNAME AND EMAIL -->
+<p class="text-5xl font-bungee pt-8 hover:text-marigold">{{ current_user.username }}</p>
+<p class="text-sm pl-4">( {{ current_user.email }} )</p>
+	<form method="POST" action="" class="flex flex-col pt-3 md:pt-8" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+		<div class="flex flex-col pt-2">
+	        <!-- FIRSTNAME LABEL + FORM -->
+	        <label for="first_name" class="text-md">First name (or nickname)</label>
+	        {% if form.first_name.errors %}
+	            {{ form.first_name(class="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	            <div class="text-fever">
+	                {% for error in form.first_name.errors %}
+	                    <br>
+	                    <span class="text-fever italic">{{ error }}</span>
+	                {% endfor %}
+	            </div>
+	        {% else %}
+	            {{ form.first_name(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	        {% endif %}
 	    </div>
-	  </div>
-	  <!-- FORM HERE -->
-	</div>
+	    <!-- LASTNAME LABEL + FORM -->
+	    <div class="flex flex-col pt-2">
+	        <label for="last_name" class="text-md">Last name</label>
+	        {% if form.last_name.errors %}
+	            {{ form.last_name(class="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	            <div class="text-fever"><!--was invalid feedback class on bootstrap-->
+	                {% for error in form.last_name.errors %}
+	                    <span class="text-fever italic">{{ error }}</span>
+	                {% endfor %}
+	            </div>
+	        {% else %}
+	            {{ form.last_name(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	        {% endif %}
+	    </div>
+	     <!-- EMAIL LABEL + FORM -->
+	    <div class="flex flex-col pt-2">
+	        <label for="email" class="text-md">E-mail</label>
+	        {% if form.email.errors %}
+	            {{ form.email(class="shadow appearance-none border rounded w-full py-2 px-3 text-red-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	            <div class="text-fever"><!--was invalid feedback class on bootstrap-->
+	                {% for error in form.email.errors %}
+	                    <span class="text-fever italic">{{ error }}</span>
+	                {% endfor %}
+	            </div>
+	        {% else %}
+	            {{ form.email(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline") }}
+	        {% endif %}
+	    </div>
+	    <!-- PROFILE PICTURE -->
+	    <div class="flex flex-col pt-2">
+	        <label for="picture" class="text-md">Profile picture</label>
+	        {{ form.picture(class="form-control block w-full py-2 text-base font-normal italic text-gray-700 bg-clip-padding transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none") }}
+
+	        {% if form.picture.errors %}
+	            {% for error in form.email.errors %}
+	            <span class="text-fever italic">{{ error }}</span>
+	            <br>
+	            {% endfor %}
+	        {% endif %}
+	    </div>
+	    <input type="submit" value="Update my info" class="text-black font-bold uppercase text-md p-2 mt-8" />
+	</form>
+	<div class="text-md font-italic font-libre text-fever">
+	    {% with messages = get_flashed_messages(with_categories=true) %}
+	        {% if messages %}
+	            {% for category, message in messages %}
+	                    {{  message }}
+	            {% endfor %}
+	        {% endif %}
+	    {% endwith %}
+	</div> 
 {% endblock content %}

@@ -1,17 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="p-8">
+	<a href="{{ url_for('new_post')}}" class="flex justify-center text-[32px] italic font-patrick text-wine hover:text-marigold">Make a new post here.</a>
+	<br>
+</div>
+<div class="text-md bold font-libre text-fever">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                    <br>
+                    {{  message }}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div> 
 {% for post in posts %}
-
-		<article class="media content-section">
-		  <div class="media-body">
-		    <div class="article-metadata">
-		      <a class="mr-2" href="#">{{ post.author }}</a>
-		      <small class="text-muted">{{ post.date_posted }}</small>
-		    </div>
-		    <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-		    <p class="article-content">{{ post.content }}</p>
-		  </div>
-		</article>
+<div class="flex-auto bg-darkcru shadow-[0_2px_4px_2px_rgba(0,0,0,0.25)] pl-6 py-3 my-12 leading-8">
+	<div class="font-bitter font-bold lowercase text-mulberry text-[14px]">{{ post.date_posted.strftime('%B %d, %Y') }}</div>
+	<a class="discuss-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+	<p class="leading-7 px-8 my-5 mtracking-wide whitespace-pre-wrap">{{ post.content }}</p>
+	<div class="text-right">
+	<div class="inline-flex font-patrick text-right align-middle text-black text-[32px] items-center mx-4"><img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="user image" class="self-center w-10 h-10 rounded-full mx-3"/> {{ post.author.first_name }} {{post.author.last_name}} 
+	</div>
+	</div>
+</div>
 
 	{% endfor %}
 

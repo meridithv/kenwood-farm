@@ -1,9 +1,10 @@
 module.exports = {
   content: ["./farm_chat/templates/*.{html,js}"],
   theme: {
-    colors: {
+     colors: {
       forest: '#242D24',
       ecru: '#F9F4EB',
+      darkcru: '#E8DDC7',
       anguilla: '#1A87A1',
       tahiti: '#40B5C3',
       pool: '#7EC8C1',
@@ -16,7 +17,9 @@ module.exports = {
       clem: '#FA831F',
       marigold: '#FA9D2C',
       creamsoda: '#FFF5CB',
-      white: '#FFFFFF'
+      white: '#FFFFFF',
+      black: '000000',
+      greener: '#0BDA51'
     },
     screens: {
       sm:'480px',
@@ -30,7 +33,8 @@ module.exports = {
         libre: ['Libre Baskerville', 'serif'],
         bitter: ['Bitter', 'serif'],
         bungee: ['Bungee', 'sans-serif'],
-        yeseva: ['Yeseva One', 'serif']
+        yeseva: ['Yeseva One', 'serif'],
+        patrick: ['Patrick Hand SC', 'sans-serif']
       },
     }
   }

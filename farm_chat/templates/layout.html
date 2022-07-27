@@ -4,54 +4,75 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Kenwood Online</title>
-	<link rel="stylesheet" href="./static/styles.css">
+	<link rel="stylesheet" href={{ url_for('static', filename='styles.css') }}>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
 </head>
-<body class="bg-[#242D24]">
+<body class="woods-bg bg-fixed overscroll-none">
+	<!--was previously "bg-[#242D24]" -->
 	<div class="bg-gray-50">
 		<div class="max-w-7xl mx-auto grid grid-cols-12 bg-gray-200">
 		     <div class="col-span-2">
 		     	<!--Left sidebar -->
 		     </div>
-		     <div class="col-span-8 bg-[#F3E8D0] h-screen">
+		     <div class="col-span-8 bg-[#F3E8D0] min-h-screen">
 		     	<!-- Navbar -->
 				<nav class="relative container mx-auto px-8 bg-[#F3E8D0]">
 					<!--Flex container -->
 					<div class ="flex items-center justify-evenly">
 						<!-- Logo -->
 						<div class="pt-1">
-							<img src="./static/images/kenwood_logo.png" width=220px alt="" />
+							<img src={{ url_for('static', filename='images/kenwood_logo.png') }} width=220px alt="" />
 						</div>
 						<!-- Menu items -->
 						<div class="hidden md:flex space-x-6 text-xs uppercase font-plex tracking-widest">
-							<a href="{{ url_for('discuss') }}" class="hover:text-[#6D000A]">Calendar</a>
-							<a href="{{ url_for('photos') }}" class="hover:text-[#AD002B]">Photos</a>
-							<a href="{{ url_for('discuss') }}" class="hover:text-[#C82813]">Farm chat</a>
-							<a href="{{ url_for('tree') }}" class="hover:text-fever">Family Tree</a>
+							<a href="{{ url_for('calendar') }}" class="hover:text-[#6D000A] ease-in-out duration-700">Calendar</a>
+							<a href="{{ url_for('photos') }}" class="hover:text-[#AD002B] ease-in-out duration-700">Photos</a>
+							<a href="{{ url_for('discuss') }}" class="hover:text-[#C82813] ease-in-out duration-700">Farm chat</a>
+							<a href="{{ url_for('tree') }}" class="hover:text-fever ease-in-out duration-700">Family Tree</a>
 							{% if current_user.is_authenticated %}
-			                <a href="{{ url_for('account') }}" class="hover:text-clem">Account</a>
-			                <a href="{{ url_for('logout') }}" class="hover:text-marigold">Logout</a>
+			                <a href="{{ url_for('logout') }}" class="hover:text-marigold ease-in-out duration-700">Logout</a>
 			              {% else %}
-			                <a href="{{ url_for('login') }}" class="hover:text-clem">Log in</a>
-			                <a href="{{ url_for('register') }}" class="hover:text-marigold">Register</a>
+			                <a href="{{ url_for('login') }}" class="hover:text-clem ease-in-out duration-700">Log in</a>
+			                <a href="{{ url_for('register') }}" class="hover:text-marigold ease-in-out duration-700">Register</a>
 			              {% endif %}
 						</div>
-						<!-- Button -->
 					</div>
 				</nav>
 			<div class="mx-auto px-8 pt-8">
-				{% block content %} {% endblock %}
+				{% block content %} {% endblock content %}
 			</div>
 		</div>
 		<div class="col-span-2">
 			<!--Right sidebar -->
-			<div class ="flex p-2">
+			<div class ="flex p-2 pt-4 pl-10">
 				{% if current_user.is_authenticated %}
-				<img src="./static/profile_pics/default_avatar.png" width='40px' height='40px'>
-				<div class="text-sm font-plex px-2 pt-2 text-white">
+				<div class="flex space-x-2">
+					<div class="relative w-14 h-14">
+						<div class="image-cropper">
+							<img src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" alt="user image" />
+						</div>
+						<div class="absolute bottom-1 right-1 h-4 w-4 my-1 border-2 border-black rounded-full bg-greener z-2"></div>
+					</div>
+				</div>
+				<div class="text-sm font-plex px-2 tracking-wider bold text-white leading-6">
 					<i><b>Welcome,&nbsp;</b></i><br>
-					<span class="hover:text-marigold"><a href="{{ url_for('account')}} ">John Mathews II</a></span>!
+					<span class="hover:text-marigold"><a href="{{ url_for('account')}} ">{{ current_user.first_name }}</a></span>!
 				</div>
 				{% endif %}
+			</div>
 		</div>
 	</div>
 </body>
