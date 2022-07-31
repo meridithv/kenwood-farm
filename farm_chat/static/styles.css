@@ -1321,6 +1321,10 @@ body {
   line-height: 54px;
 }
 
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+
 .tracking-widest {
   letter-spacing: 0.1em;
 }

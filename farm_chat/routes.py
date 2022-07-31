@@ -3,9 +3,10 @@ import secrets
 from flask import render_template, url_for, flash, redirect, request, abort
 from farm_chat import app, db, bcrypt
 from sqlalchemy import desc
-from farm_chat.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm
-from farm_chat.models import User, Post
+from farm_chat.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, AddEventForm
+from farm_chat.models import User, Post, Event
 from flask_login import login_user, current_user, logout_user, login_required
+
 
 @app.route("/")
 @app.route("/discuss") 
@@ -63,10 +64,47 @@ def logout():
 def tree():
 	return render_template('tree.html', title='The Mathews/Sharvott/etc Tree')
 
+@app.route("/new_event", methods=['GET', 'POST'])
+@login_required
+def new_event():
+	form = AddEventForm() 
+	if form.validate_on_submit():
+		event = Event(name=form.name.data, content=form.content.data, start=form.start.data, end=form.end.data, author=current_user)
+		db.session.add(event)
+		db.session.commit()
+		flash(f'Thanks! You\'ve added your event to the farm calendar.', 'success')
+		return redirect(url_for('calendar'))
+	return render_template('newevent.html', title='Working on it', form=form)
+
+
 @app.route("/calendar")
 @login_required
 def calendar():
-	return render_template('calendar.html', title='The Farm Calendar')
+	events = [
+	{
+		'todo': 'Blabity blah',
+		'start': '2022-07-30',
+		'end': '2022-07-30'
+	},
+	{
+		'todo': 'Ladidadidoo',
+		'start': '2022-07-31',
+		'end': '2022-07-31' 
+	}
+	 ]
+	items = Event.query.all()
+	for item in items:
+		event_dict = {
+		'todo': '',
+		'start': '',
+		'end': ''
+		}
+		event_dict['todo'] = item.name
+		event_dict['start'] = item.start
+		event_dict['end'] = item.end
+		events.append(event_dict)
+	
+	return render_template('calendar.html', title='The Farm Calendar', events = events)
 
 
 @app.route("/photos")

@@ -8,17 +8,6 @@
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
 	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
 </head>
 <body class="woods-bg bg-fixed overscroll-none">
 	<!--was previously "bg-[#242D24]" -->
@@ -67,9 +56,9 @@
 						<div class="absolute bottom-1 right-1 h-4 w-4 my-1 border-2 border-black rounded-full bg-greener z-2"></div>
 					</div>
 				</div>
-				<div class="text-sm font-plex px-2 tracking-wider bold text-white leading-6">
+				<div class="text-sm font-plex px-2 tracking-wider font-bold text-white leading-6">
 					<i><b>Welcome,&nbsp;</b></i><br>
-					<span class="hover:text-marigold"><a href="{{ url_for('account')}} ">{{ current_user.first_name }}</a></span>!
+					<span class="font-bold hover:text-marigold"><a href="{{ url_for('account')}} ">{{ current_user.first_name }}</a></span>!
 				</div>
 				{% endif %}
 			</div>
